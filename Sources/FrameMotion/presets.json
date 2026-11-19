@@ -1,0 +1,298 @@
+{
+  "_units": "t = seconds from preset start. scale = multiplier on the framed still (1.0 = as-framed). y = vertical offset as a fraction of canvas height (positive = down, e.g. 0.02 shifts down 2%). blur = Gaussian radius in px at 1080p reference width, scaled linearly with output width. Adding a preset = appending one JSON object here; no code changes needed.",
+  "_live_path": "SwiftUI reads these keyframes directly: scale -> .scaleEffect, y * canvasHeight -> .offset(y:), blur -> .blur(radius:). Interpolate linearly (or with easing) between keyframes.",
+  "_export_path": "FrameMotion engine samples keyframes at fps, rasterizes a PNG sequence with PIL, and encodes with ffmpeg (h264/hevc opaque .mp4; hevc-alpha/prores alpha .mov).",
+  "presets": [
+    {
+      "name": "spring-in",
+      "description": "Snappy scale-in with a small overshoot, for entrance moments.",
+      "duration": 0.9,
+      "fps": 30,
+      "loop": false,
+      "keyframes": [
+        {
+          "t": 0.0,
+          "scale": 0.92,
+          "y": 0.035,
+          "blur": 8.0
+        },
+        {
+          "t": 0.12,
+          "scale": 0.96,
+          "y": 0.02,
+          "blur": 5.0
+        },
+        {
+          "t": 0.25,
+          "scale": 1.005,
+          "y": 0.008,
+          "blur": 2.0
+        },
+        {
+          "t": 0.38,
+          "scale": 1.02,
+          "y": 0.002,
+          "blur": 0.5
+        },
+        {
+          "t": 0.52,
+          "scale": 1.012,
+          "y": 0.0,
+          "blur": 0.0
+        },
+        {
+          "t": 0.65,
+          "scale": 1.004,
+          "y": 0.0,
+          "blur": 0.0
+        },
+        {
+          "t": 0.78,
+          "scale": 1.0,
+          "y": 0.0,
+          "blur": 0.0
+        },
+        {
+          "t": 0.9,
+          "scale": 1.0,
+          "y": 0.0,
+          "blur": 0.0
+        }
+      ]
+    },
+    {
+      "name": "float",
+      "description": "Gentle 4s idle loop for ambient motion. First and last keyframes match so it loops cleanly.",
+      "duration": 4.0,
+      "fps": 30,
+      "loop": true,
+      "keyframes": [
+        {
+          "t": 0.0,
+          "scale": 1.0,
+          "y": 0.0,
+          "blur": 0.0
+        },
+        {
+          "t": 0.5,
+          "scale": 1.001,
+          "y": -0.008,
+          "blur": 0.0
+        },
+        {
+          "t": 1.0,
+          "scale": 1.002,
+          "y": -0.012,
+          "blur": 0.0
+        },
+        {
+          "t": 1.5,
+          "scale": 1.001,
+          "y": -0.008,
+          "blur": 0.0
+        },
+        {
+          "t": 2.0,
+          "scale": 1.0,
+          "y": 0.0,
+          "blur": 0.0
+        },
+        {
+          "t": 2.5,
+          "scale": 1.001,
+          "y": 0.008,
+          "blur": 0.0
+        },
+        {
+          "t": 3.0,
+          "scale": 1.002,
+          "y": 0.012,
+          "blur": 0.0
+        },
+        {
+          "t": 3.5,
+          "scale": 1.001,
+          "y": 0.008,
+          "blur": 0.0
+        },
+        {
+          "t": 4.0,
+          "scale": 1.0,
+          "y": 0.0,
+          "blur": 0.0
+        }
+      ]
+    },
+    {
+      "name": "parallax",
+      "description": "Slow 3s upward drift with a slight push-in, for hero pans.",
+      "duration": 3.0,
+      "fps": 30,
+      "loop": false,
+      "keyframes": [
+        {
+          "t": 0.0,
+          "scale": 1.0,
+          "y": 0.02,
+          "blur": 0.0
+        },
+        {
+          "t": 0.5,
+          "scale": 1.008,
+          "y": 0.013,
+          "blur": 0.0
+        },
+        {
+          "t": 1.0,
+          "scale": 1.017,
+          "y": 0.007,
+          "blur": 0.0
+        },
+        {
+          "t": 1.5,
+          "scale": 1.025,
+          "y": 0.0,
+          "blur": 0.0
+        },
+        {
+          "t": 2.0,
+          "scale": 1.033,
+          "y": -0.007,
+          "blur": 0.0
+        },
+        {
+          "t": 2.5,
+          "scale": 1.042,
+          "y": -0.013,
+          "blur": 0.0
+        },
+        {
+          "t": 3.0,
+          "scale": 1.05,
+          "y": -0.02,
+          "blur": 0.0
+        }
+      ]
+    },
+    {
+      "name": "hero-zoom",
+      "description": "Classic 2s Ken Burns push-in with a faint upward drift.",
+      "duration": 2.0,
+      "fps": 30,
+      "loop": false,
+      "keyframes": [
+        {
+          "t": 0.0,
+          "scale": 1.0,
+          "y": 0.01,
+          "blur": 0.0
+        },
+        {
+          "t": 0.25,
+          "scale": 1.008,
+          "y": 0.008,
+          "blur": 0.0
+        },
+        {
+          "t": 0.5,
+          "scale": 1.02,
+          "y": 0.005,
+          "blur": 0.0
+        },
+        {
+          "t": 0.75,
+          "scale": 1.035,
+          "y": 0.002,
+          "blur": 0.0
+        },
+        {
+          "t": 1.0,
+          "scale": 1.052,
+          "y": 0.0,
+          "blur": 0.0
+        },
+        {
+          "t": 1.25,
+          "scale": 1.068,
+          "y": -0.003,
+          "blur": 0.0
+        },
+        {
+          "t": 1.5,
+          "scale": 1.082,
+          "y": -0.006,
+          "blur": 0.0
+        },
+        {
+          "t": 1.75,
+          "scale": 1.093,
+          "y": -0.008,
+          "blur": 0.0
+        },
+        {
+          "t": 2.0,
+          "scale": 1.1,
+          "y": -0.01,
+          "blur": 0.0
+        }
+      ]
+    },
+    {
+      "name": "rise",
+      "description": "Gentle 2.4s rise-and-settle with a soft focus pull; matches the sakuracord-desert example.",
+      "duration": 2.4,
+      "fps": 30,
+      "loop": false,
+      "keyframes": [
+        {
+          "t": 0.0,
+          "scale": 0.96,
+          "y": 0.03,
+          "blur": 4.0
+        },
+        {
+          "t": 0.3,
+          "scale": 0.975,
+          "y": 0.022,
+          "blur": 2.5
+        },
+        {
+          "t": 0.6,
+          "scale": 0.99,
+          "y": 0.014,
+          "blur": 1.2
+        },
+        {
+          "t": 0.9,
+          "scale": 1.0,
+          "y": 0.008,
+          "blur": 0.4
+        },
+        {
+          "t": 1.2,
+          "scale": 1.005,
+          "y": 0.003,
+          "blur": 0.0
+        },
+        {
+          "t": 1.6,
+          "scale": 1.008,
+          "y": 0.0,
+          "blur": 0.0
+        },
+        {
+          "t": 2.0,
+          "scale": 1.008,
+          "y": 0.0,
+          "blur": 0.0
+        },
+        {
+          "t": 2.4,
+          "scale": 1.008,
+          "y": 0.0,
+          "blur": 0.0
+        }
+      ]
+    }
+  ]
+}

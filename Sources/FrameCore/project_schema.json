@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://frame.app/schema/frameproj-1.json",
+  "title": "frameproj",
+  "description": "Layered editable Frame project. SOURCE OF TRUTH for FrameProject.swift (regenerate with: Renderer.py --generate-swift Sources/FrameCore/FrameProject.swift). Each layer is independently replaceable: open -> edit one layer -> re-render without touching other layers.",
+  "type": "object",
+  "required": ["frameproj", "screenshot", "frame", "backdrop"],
+  "properties": {
+    "frameproj": {
+      "type": "integer",
+      "const": 1,
+      "description": "Schema version. Readers must accept version 1 and preserve unknown fields for forward compatibility."
+    },
+    "canvas": {
+      "type": "object",
+      "description": "Optional output dimensions. Foreground fits inside this canvas with its aspect ratio preserved.",
+      "required": ["width", "height"],
+      "properties": {
+        "width": {"type": "integer", "minimum": 1, "maximum": 8192},
+        "height": {"type": "integer", "minimum": 1, "maximum": 8192}
+      }
+    },
+    "screenshot": {
+      "type": "object",
+      "description": "Layer 1: raw input pixels. Replace path to swap content; other layers untouched.",
+      "required": ["path"],
+      "properties": {
+        "path": { "type": "string", "description": "Absolute path to the source screenshot file." },
+        "sha256": { "type": "string", "description": "Optional integrity hash (hex). Renderer errors on mismatch when present." }
+      }
+    },
+    "frame": {
+      "type": "object",
+      "description": "Layer 2: device bezel applied via frames CLI. Re-run frames to refresh output; backdrop/adjust untouched.",
+      "required": ["device", "color"],
+      "properties": {
+        "device": { "type": "string", "description": "Exact frames device name, e.g. MacBook Pro PROLED 16." },
+        "color": { "type": "string", "description": "Frame color name, e.g. Space Black." },
+        "output": { "type": "string", "description": "Cached framed PNG (RGBA). When absent or missing, the renderer runs frames to regenerate the foreground." }
+      }
+    },
+    "backdrop": {
+      "type": "object",
+      "description": "Layer 3: studio backdrop + foreground geometry. Swap path/color or retune without re-framing.",
+      "properties": {
+        "path": { "type": "string", "description": "Photo backdrop file. Cover-resized to the framed canvas." },
+        "color": { "type": "string", "description": "Solid backdrop color (#RRGGBB). Used when path is absent." },
+        "blur": { "type": "number", "default": 8, "description": "GaussianBlur radius applied to the backdrop." },
+        "grain": { "type": "number", "default": 6, "description": "Gaussian grain sigma added to the backdrop." },
+        "scale": { "type": "number", "default": 0.7, "description": "Foreground scale relative to framed size (0.70 reproduces the desert reference)." },
+        "offset": {
+          "type": "array", "items": { "type": "number" }, "minItems": 2, "maxItems": 2, "default": [0, 0],
+          "description": "Foreground offset [dx, dy] in px added to the centered position."
+        }
+      }
+    },
+    "adjust": {
+      "type": "object",
+      "description": "Layer 4: final color adjustments applied to the composite.",
+      "properties": {
+        "brightness": { "type": "number", "default": 1.0 },
+        "contrast": { "type": "number", "default": 1.0 },
+        "saturation": { "type": "number", "default": 1.0 }
+      }
+    },
+    "animation": {
+      "type": "object",
+      "description": "Layer 5: motion metadata for video export. Ignored by the still renderer; always preserved.",
+      "properties": {
+        "preset": { "type": "string" },
+        "duration": { "type": "number" },
+        "export": { "type": "string", "description": "Video export path for frames video / skill animation." }
+      }
+    }
+  }
+}

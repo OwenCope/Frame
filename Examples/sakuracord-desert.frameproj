@@ -1,0 +1,29 @@
+{
+  "frameproj": 1,
+  "screenshot": {
+    "path": "/Users/owencope/Downloads/SakuraCord-PROLED16-Black-framed.png",
+    "sha256": "7070da52d4bb4929873354dfc813833aec3a435b6742d4f21877e36940e05ce1"
+  },
+  "frame": {
+    "device": "MacBook Pro PROLED 16",
+    "color": "Space Black",
+    "output": "/Users/owencope/Downloads/SakuraCord-PROLED16-Black-framed.png"
+  },
+  "backdrop": {
+    "path": "/Users/owencope/Downloads/desert-backdrop.png",
+    "blur": 8,
+    "grain": 6,
+    "scale": 0.70,
+    "offset": [0, 0]
+  },
+  "adjust": {
+    "brightness": 1.0,
+    "contrast": 1.0,
+    "saturation": 1.0
+  },
+  "animation": {
+    "preset": "rise",
+    "duration": 2.4,
+    "export": "/Users/owencope/Downloads/SakuraCord-PROLED16-Black-desert.mp4"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "frame": {
+      "command": "python3",
+      "args": ["/Users/owencope/Developer/Frame/Sources/FrameMCP/server.py"],
+      "env": {
+        "FRAMES_BIN": "/Users/owencope/.local/bin/frames"
+      }
+    }
+  }
+}
