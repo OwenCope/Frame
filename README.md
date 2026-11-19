@@ -2,6 +2,10 @@
 
 A native macOS editor for framing screenshots with the local `frames` CLI.
 
+> **Built on [frames-cli](https://github.com/viticci/frames-cli) by [Federico Viticci](https://github.com/viticci).**
+> Every device bezel, color, and device detection in Frame comes from frames-cli and its
+> Apple Frames asset pack. Frame is a graphical front end for that work; install frames-cli first.
+
 Drop a screenshot, choose a device and backdrop, then export a PNG or MP4.
 Output formats include original dimensions, a 1290 × 2796 portrait canvas,
 a 2400 × 1350 release image, and a 1080 × 1080 social canvas. Scale, blur,
@@ -61,3 +65,16 @@ layers, relative paths, legacy migration, and resetting canvas presets.
 Python checks compare direct, CLI, and MCP output pixels and verify image
 orientation. These checks do not replace interactive macOS layout and
 keyboard testing.
+
+## Credits
+
+Frame would not exist without **[frames-cli](https://github.com/viticci/frames-cli)** by
+**Federico Viticci**, based on his Apple Frames shortcut for
+[MacStories](https://www.macstories.net). frames-cli does all of the device framing: it detects
+the device for each screenshot, supplies the device list and colors, and composites the Apple
+bezels from the Apple Frames asset pack. Frame calls it as an external program and adds the
+backdrop, layout, and motion on top.
+
+frames-cli is released under the MIT License, Copyright (c) 2026 Federico Viticci. Frame does not
+include or redistribute frames-cli or its assets. Neither project is affiliated with Apple.
+Device bezels are Apple's.
